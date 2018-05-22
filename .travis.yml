@@ -43,6 +43,8 @@ before_install:
   # install git-annex with the relevant bits
   # no recommends to avoid inheriting the entire multimedia stack
   - travis_retry sudo eatmydata apt-get install --no-install-recommends git-annex-standalone aria2 git-remote-gcrypt lsof gnupg nocache
+  # chroot/container stuff
+  - travis_retry sudo eatmydata apt-get install xz-utils singularity-container
 
 
 install:
@@ -66,7 +68,7 @@ script:
   # Verify that setup.py build doesn't puke
   - python setup.py build
   # Test installation system-wide
-  - sudo pip install -e .
+  - sudo pip install .
   # Run tests
   - http_proxy=
     PATH=$PWD/tools/coverage-bin:$PATH
@@ -77,7 +79,8 @@ script:
       --logging-level=INFO
       $TESTS_TO_PERFORM
   # Run doc examples
-  - $NOSE_WRAPPER tools/testing/run_doc_examples
+  # NOTE: We don't have a run_doc_examples ATM
+  # - $NOSE_WRAPPER tools/testing/run_doc_examples
   - if [ ! "${DATALAD_LOG_LEVEL:-}" = 2 ]; then
         PYTHONPATH=$PWD $NOSE_WRAPPER make -C docs html doctest;
     fi

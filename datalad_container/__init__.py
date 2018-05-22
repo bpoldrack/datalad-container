@@ -14,10 +14,34 @@ command_suite = (
         # specification of a command, any number of commands can be defined
         (
             # importable module that contains the command implementation
-            'datalad_container.containers',
+            'datalad_container.containers_list',
             # name of the command class implementation in above module
-            'Containers',
-            'containers',
+            'ContainersList',
+            'containers-list',
+            'containers_list',
         ),
+        (
+            'datalad_container.containers_remove',
+            # name of the command class implementation in above module
+            'ContainersRemove',
+            'containers-remove',
+            'containers_remove',
+
+        ),
+        (
+            'datalad_container.containers_add',
+            # name of the command class implementation in above module
+            'ContainersAdd',
+            'containers-add',
+            'containers_add',
+
+        ),
+        (
+            'datalad_container.containers_run',
+            'ContainersRun',
+            'containers-run',
+            'containers_run',
+
+        )
     ]
 )
